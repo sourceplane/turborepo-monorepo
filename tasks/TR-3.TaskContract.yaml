@@ -1,0 +1,30 @@
+apiVersion: orun.io/v1
+kind: TaskContract
+metadata:
+  name: TR-3
+  title: "turborepo-monorepo becomes an Orun baseline"
+spec:
+  goal: blueprint.yaml and repo-blueprint.yaml take a new monorepo from nothing to both apps live on stage and prod in one landing, held by Baseline CI
+  affects:
+    - blueprint.yaml
+    - repo-blueprint.yaml
+    - BOOTSTRAP.md
+    - .baseline
+    - .github/workflows/baseline.yml
+    - .github/workflows/tag.yml
+    - ai/context
+    - docs/phases
+    - hooks
+    - testing
+    - tooling/rebrand
+    - tooling/bootstrap
+    - tooling/catalog
+    - apps/web/docs
+    - apps/docs/docs
+    - tests/ui/docs
+    - specs/epics/turborepo-monorepo
+    - README.md
+  doneWhen:
+    - every Baseline CI tier is green
+    - a monorepo placed from it carries the monorepo only, branded, with the template's credit intact
+  gates: []
