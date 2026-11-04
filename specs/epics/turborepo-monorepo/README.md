@@ -8,7 +8,7 @@ else's in one landing.**
 
 | | |
 |---|---|
-| Status | In progress — TR0 on main |
+| Status | In progress — TR1 on main: the site runs on Workers |
 | Upstream | [vercel/turborepo › examples/basic](https://github.com/vercel/turborepo/tree/main/examples/basic), at `d95ea89` (2026-11-04), MIT |
 | Reference | [portfolio-starter-kit](https://github.com/sourceplane/portfolio-starter-kit) — the same scaffolding, tests and bootstrap, doubled to two apps |
 | Key | `TR` |
