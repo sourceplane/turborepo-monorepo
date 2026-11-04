@@ -4,7 +4,7 @@
 |---|---|---|
 | TR0 — the spec | ✅ | the repository's first commit |
 | TR1 — the monorepo on Workers | ✅ | TR-2 |
-| TR2 — a baseline | planned | TR-3 |
+| TR2 — a baseline | ✅ | TR-3, tagged `baseline-v1` |
 
 ## Departures from the upstream template
 
