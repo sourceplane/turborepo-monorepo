@@ -1,0 +1,31 @@
+# The epic's declaration. metadata.name equals the directory name; metadata.key
+# is the task-key prefix this epic reserves (TR → TR-1, TR-2, …). Owner, target
+# date and health are the platform's — never written here.
+apiVersion: orun.io/v1
+kind: Epic
+metadata:
+  name: turborepo-monorepo
+  key: TR
+spec:
+  title: "Vercel's Monorepo Starter (Next.js & Turborepo) on Cloudflare Workers"
+  summary: "Turborepo's basic example — two Next.js 16 apps, web and docs, sharing a React UI package and their ESLint and TypeScript configs — runs on Cloudflare Workers + Static Assets through @opennextjs/cloudflare, one Worker per app, each its own Orun component, inside Workers Free, inside the Cirrus baseline's repository conventions, and becomes an Orun baseline that takes a new monorepo from nothing to both apps live on stage and prod in one landing."
+  state: started
+  milestones:
+    - name: "TR0 — the spec"
+      exitCriteria:
+        - "the repository is born with its intent, CI, tooling and spec index, and this doc set and the task contracts are on main"
+      tasks: [TR-1]
+    - name: "TR1 — the monorepo on Workers"
+      exitCriteria:
+        - "apps/web and apps/docs are the upstream template's apps, each built by OpenNext into its own Worker with Static Assets, and @repo/ui, @repo/eslint-config and @repo/typescript-config are the template's packages"
+        - "each app is its own component with its own Worker, lane and smoke: a change to one app deploys that app, a change to a shared package deploys both"
+        - "the template builds on the runners' Node 22 and pnpm 10, every pin that moved recorded"
+        - "`pnpm typecheck`, `pnpm lint`, `pnpm test` and `pnpm build` are green, and each Worker fits Workers Free"
+        - "the README says how to run, test, preview and deploy it, and how every Vercel piece maps to Cloudflare"
+      tasks: [TR-2]
+    - name: "TR2 — a baseline"
+      exitCriteria:
+        - "blueprint.yaml (the console card) and repo-blueprint.yaml (the build) take a new monorepo from nothing to both apps live on stage and prod in one landing, then record it"
+        - "a monorepo built from it carries the monorepo only, renamed throughout to its own name, repository and Workers, with the template's credit intact"
+        - "Baseline CI is green: contract tests, generated component docs, the blueprint read by the pinned orun, the leak gate, the offline bootstrap and the end-to-end tier over both apps"
+      tasks: [TR-3]

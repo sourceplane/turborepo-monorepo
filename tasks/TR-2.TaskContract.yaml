@@ -1,0 +1,26 @@
+apiVersion: orun.io/v1
+kind: TaskContract
+metadata:
+  name: TR-2
+  title: "The monorepo on Workers"
+spec:
+  goal: The template's two Next.js apps run on Cloudflare Workers + Static Assets through OpenNext, one Worker and one component each, sharing the template's packages, on the runners' Node 22 and pnpm 10, with tests and a README that says how it maps to Vercel
+  affects:
+    - apps/web
+    - apps/docs
+    - packages/ui
+    - packages/eslint-config
+    - packages/typescript-config
+    - tests/ui
+    - tooling/eslint
+    - package.json
+    - turbo.json
+    - pnpm-lock.yaml
+    - pnpm-workspace.yaml
+    - README.md
+    - .gitignore
+  doneWhen:
+    - pnpm typecheck, lint, test and build are green
+    - wrangler dev serves each app's page, assets and 404
+    - each Worker is under Workers Free's 3 MiB gzipped
+  gates: []
