@@ -1,0 +1,80 @@
+apiVersion: sourceplane.io/v1
+kind: Component
+metadata:
+  name: docs
+  description: The docs app (Next.js on Cloudflare Workers + Static Assets via @opennextjs/cloudflare, per environment)
+spec:
+  type: cloudflare-workers-assets-turbo
+  lifecycle: production
+  owner: platform
+  # Its pages, attached to it in the workspace's catalog: what the Docs
+  # library shows for it, and what the catalog's docs and runbook checks read.
+  # Generated from what this manifest and its sources declare.
+  docs:
+    overview: docs/overview.md
+    pages:
+      - { path: docs/architecture.md, role: architecture, title: Architecture }
+      - { path: docs/runbook.md, role: runbook, title: Runbook }
+  # `app`, not `web`: a domain and a component share one name space in the
+  # catalog, and a domain called `web` hid this component from it.
+  domain: app
+  path: apps/docs
+  # Its own lane per environment: the Next.js build is the longest job in the
+  # plan, and a shared lane would wait on it.
+  lane: isolated
+  subscribe:
+    environments:
+      - name: dev
+        profile: verify
+      - name: stage
+        profile: verify
+        profileRules:
+          - profile: deploy
+            when:
+              triggerRef: github-push-main
+      - name: prod
+        profile: verify
+        profileRules:
+          - profile: deploy
+            when:
+              triggerRef: github-push-main
+  parameters:
+    nodeVersion: "22"
+    pnpmVersion: "10.12.1"
+
+    workspaceDir: ../..
+    appDir: .
+
+    turboFilter: "docs"
+    wranglerConfig: wrangler.jsonc
+
+    # @opennextjs/cloudflare emits a Worker entrypoint plus a static-assets
+    # directory bound via ASSETS — both deploy in one `wrangler deploy`.
+    workerEntrypoint: .open-next/worker.js
+    assetsDir: .open-next/assets
+
+    # Per-env worker name: turborepo-monorepo-docs-{dev,stage,prod}.
+    workerName: turborepo-monorepo-docs
+    environmentAwareWorkerName: true
+
+    # The account's workers.dev subdomain; exported to the smoke step as
+    # ${WORKERS_DEV_SUBDOMAIN} and used to build ${DEPLOYED_URL}.
+    workersDevSubdomain: your-workers-subdomain
+
+    installCommand: pnpm install --frozen-lockfile
+    # The app's page links nothing absolute (no sitemap, feed or Open Graph
+    # image), so the build needs no origin: turbo builds the app and the
+    # workspace packages it depends on (@repo/ui), then OpenNext bundles it.
+    buildCommand: pnpm exec turbo run build --filter=docs
+
+    # Smoke: the home page is THIS app's (it names its own page file), the
+    # shared @repo/ui Button rendered into it, and a static asset is served.
+    # Not the product's name, which is the owner's to change and HTML-escaped
+    # when it carries an `&` or `'`. Each response is buffered before grep so
+    # an early match cannot SIGPIPE curl.
+    smokeCommand: "html=$(curl -sfL \"${DEPLOYED_URL}/\") && echo \"${html}\" | grep -q 'apps/docs/app/page.tsx' && echo \"${html}\" | grep -q '>Open alert</button>' && svg=$(curl -sf \"${DEPLOYED_URL}/turborepo-light.svg\") && echo \"${svg}\" | grep -q '<svg'"
+  labels:
+    team: platform
+    layer: delivery
+    surface: docs
+    runtime: cloudflare

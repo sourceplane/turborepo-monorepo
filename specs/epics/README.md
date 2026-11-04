@@ -7,6 +7,6 @@ folder is the adoption; the merge creates the epic in the workspace.
 
 | Epic | Cluster | Status | What it is |
 |------|---------|--------|------------|
-| [`turborepo-monorepo/`](./turborepo-monorepo/) | **TR** | In progress (TR0) | Vercel's Monorepo Starter — Turborepo's basic example, two Next.js apps sharing a UI package — on Cloudflare Workers + Static Assets through OpenNext, one Worker per app, and an Orun baseline that instantiates it (TR2) |
+| [`turborepo-monorepo/`](./turborepo-monorepo/) | **TR** | In progress (TR1: the site on Workers) | Vercel's Monorepo Starter — Turborepo's basic example, two Next.js apps sharing a UI package — on Cloudflare Workers + Static Assets through OpenNext, one Worker per app, and an Orun baseline that instantiates it (TR2) |
 
 As-built ≠ intent: what shipped lives in each epic's `IMPLEMENTATION-STATUS.md`.
