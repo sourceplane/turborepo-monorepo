@@ -9,7 +9,7 @@ metadata:
 spec:
   title: "Vercel's Monorepo Starter (Next.js & Turborepo) on Cloudflare Workers"
   summary: "Turborepo's basic example — two Next.js 16 apps, web and docs, sharing a React UI package and their ESLint and TypeScript configs — runs on Cloudflare Workers + Static Assets through @opennextjs/cloudflare, one Worker per app, each its own Orun component, inside Workers Free, inside the Cirrus baseline's repository conventions, and becomes an Orun baseline that takes a new monorepo from nothing to both apps live on stage and prod in one landing."
-  state: started
+  state: completed
   milestones:
     - name: "TR0 — the spec"
       exitCriteria:
