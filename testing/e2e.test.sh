@@ -215,7 +215,7 @@ chunks = sorted(set(re.findall(r'/_next/static/chunks/[^"\\]+\.js', page)))
 if not any(b"Hello from your " in get(c)[2] for c in chunks):
     bad("no script the page loads carries the Button's click handler")
 
-for path in ("/turborepo-light.svg", "/turborepo-dark.svg", "/vercel.svg", "/globe.svg", "/window.svg"):
+for path in ("/turborepo-light.svg", "/turborepo-dark.svg", "/orunbase.svg", "/globe.svg", "/window.svg"):
     s, ctype, body = get(path)
     if s != 200 or not ctype.startswith("image/svg+xml") or b"<svg" not in body:
         bad(f"{path} answered {s} {ctype}")
