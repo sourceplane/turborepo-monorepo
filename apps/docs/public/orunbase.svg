@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20" role="img" aria-label="Orunbase">
+  <style>.dome{fill:#FAFAFA}.earth{fill:#E3B34C}@media (prefers-color-scheme: dark){.dome{fill:#171717}.earth{fill:#B8862F}}</style>
+  <path class="dome" d="M5.06 31.58 A20.4 20.4 0 1 1 42.94 31.58 Z"/>
+  <path class="earth" d="M10.43 39.23 A20.4 20.4 0 0 0 37.57 39.23 Z"/>
+</svg>
